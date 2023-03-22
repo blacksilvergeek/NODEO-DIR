@@ -112,6 +112,8 @@ def evaluation(config, device, df, df_with_grid):
     warped_seg = ST_seg(moving_seg, df, return_phi=False)
     dice_move2fix = dice(warped_seg.unsqueeze(0).unsqueeze(0).detach().cpu().numpy(), fixed_seg, label)
     print('Avg. dice on %d structures: ' % len(label), np.mean(dice_move2fix[0]))
+    print('Std of dice on %d structures: ' % len(label), np.std(dice_move2fix[0]))
+
 
 def save_result(config, df, warped_moving):
     save_nii(df.permute(2,3,4,0,1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
