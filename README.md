@@ -1,5 +1,30 @@
-# NODEO-DIR
+# Reproduce NODEO-DIR
 [CVPR 2022] NODEO: A Neural Ordinary Differential Equation Based Optimization Framework for Deformable Image Registration
+
+group members
+
+
+# Introduction
+
+
+
+# Method
+
+
+
+
+# Result 
+
+## Reproduce
+
+## New data
+
+# Conclusion
+
+
+
+
+
 # Usage
 Run Registration.py
 
