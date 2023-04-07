@@ -10,6 +10,10 @@ group members
 
 # Method
 
+## Reprodece Figure
+Here we choose 
+
+![](https://i.imgur.com/lRdn3tP.png)
 
 
 
@@ -18,6 +22,8 @@ group members
 ## Reproduce
 
 ## New data
+
+## hyperparamter check
 
 # Conclusion
 
