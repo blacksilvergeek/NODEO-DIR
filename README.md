@@ -239,6 +239,22 @@ Here, an additional conversion to torch.tensor is written in the calculation of 
 
 
 ## Reproduce
+<center>Both K and J</center>
+
+![Both K and J](https://i.imgur.com/iLxyd9J.png)
+
+<center>Only K</center>
+
+![Only K](https://i.imgur.com/GgnOXeE.png)
+
+<center>Only J</center>
+
+![Only J](https://i.imgur.com/Ctibsz5.png)
+
+<center>None</center>
+
+![None](https://i.imgur.com/aemUjUf.png)
+
 
 ## New data
 
