@@ -1,7 +1,9 @@
 # Reproduce NODEO-DIR
 [CVPR 2022] NODEO: A Neural Ordinary Differential Equation Based Optimization Framework for Deformable Image Registration
 
-group members
+group members:
+Yongsheng Han
+
 
 
 # Introduction
@@ -256,7 +258,60 @@ Here, an additional conversion to torch.tensor is written in the calculation of 
 ![None](https://i.imgur.com/aemUjUf.png)
 
 
-## New data
+# Applying code on new data
+
+## Characteristics of orignal dataset
+
+### Image content
+
+The original paper applies the code on OASIS and CANDI datasets. These datasets are similar in the way that both contain images of brain scans. To collect the OASIS datasets, brain scans of adults are used whereas the subjects of the CANDI dataset are children and adolescents
+
+### Image format
+
+Both datasets used in the original paper contain images in a .nii.gz format. Images in this format contain pixel information in 3 dimensions, which represents multiple slices of a brain scan. In addition 3D image info, the datasets contain segments of the subjects, which represent a slice of the side view of the scanned images.
+
+### Image dimensionality
+
+The images used for the results in the table presented in the paper are all 3-dimansional
+
+## Required properties of input
+
+### Image content
+
+For the neural network described in the paper to be able to properly learn, the fixed and moving images given as the input should be of the same subject. It must be possible for the moving image to deform into the fixed image, which doesn't make sense if the fixed and moving images given to the model as input are not from the same subject.
+
+### Image format
+
+The data used in the paper is given in .nii.gz format. However, this is not a requirement for the model to work. The code in its original format can take any 3D image information with a corresponding segmentation slice. The code provided on github converts .nii.gz images to a 3D array of the pixel values. However this step can be modified to convert images of another data type to a 3D array, and then apply the code from that point on.
+
+### Image dimensionality
+
+In addition to being able to take 3D images of a different format, the code can be modified to be able to process 2D images. How this can be done is described in the previous section on reproduction of the original results. With this modification, the code can be applied on any image type
+
+To summarize, either 3D or 2D images of any format can be used as input for the code, the only hard requirement is that the fixed and moving images are of the same subject, taken at different times.
+
+### Results
+
+In order to compare with new input, the FIRE (Fundus Image REgistration) dataset taken from https://www.kaggle.com/datasets/andrewmvd/fundus-image-registration.
+
+One combination of inputs can be seen below, for this subject A01 was taken:
+
+<center>Input from subjetc A01</center>
+
+Fixed                                    |  Moving
+:-------------------------:|:-------------------------:
+![](https://i.imgur.com/7wu3aZO.jpg) |  ![](https://i.imgur.com/tCLK5Ce.jpg)
+
+
+The code outputs the following images for the warped moving image and the grid visualization of the deformation field:
+
+<center>Output from running the code</center>
+
+Warped moving greyscaled                                    |  Grid visualization of deformation field
+:-------------------------:|:-------------------------:
+![](https://i.imgur.com/sJ6CuUi.png)               |  ![](https://i.imgur.com/sajKUXM.png)
+
+
 
 ## hyperparamter check
 
