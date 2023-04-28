@@ -2,6 +2,7 @@
 [CVPR 2022] NODEO: A Neural Ordinary Differential Equation Based Optimization Framework for Deformable Image Registration
 
 group members:
+
 Yongsheng Han
 
 
@@ -296,20 +297,47 @@ In order to compare with new input, the FIRE (Fundus Image REgistration) dataset
 
 One combination of inputs can be seen below, for this subject A01 was taken:
 
-<center>Input from subjetc A01</center>
+<center>Input from subject A01</center>
 
 Fixed                                    |  Moving
 :-------------------------:|:-------------------------:
-![](https://i.imgur.com/7wu3aZO.jpg) |  ![](https://i.imgur.com/tCLK5Ce.jpg)
+![](https://i.imgur.com/7wu3aZO.jpg =300x300) |  ![](https://i.imgur.com/tCLK5Ce.jpg =300x300)
+
+Some important settings for collecting the results were:
+
+| Parameter          | Value           | 
+| :-----------------: | :-----------------: | 
+| Image size   | 512x512   | 
+| Epoches   | 50   | 
+| Learning rate   | 0.005   | 
+| Kernel type   | Averaging kernel   | 
 
 
 The code outputs the following images for the warped moving image and the grid visualization of the deformation field:
 
 <center>Output from running the code</center>
 
-Warped moving greyscaled                                    |  Grid visualization of deformation field
+Fixed                                    |  Moving
 :-------------------------:|:-------------------------:
-![](https://i.imgur.com/sJ6CuUi.png)               |  ![](https://i.imgur.com/sajKUXM.png)
+![](https://i.imgur.com/sJ6CuUi.png =300x300)   |  ![](https://i.imgur.com/sajKUXM.png =300x300)
+
+In order to collect the results for average dice
+
+| Dice avg.          | Dice std.           | Neg. J ratio    |
+| :-----------------: | :-----------------: | :-------------: |
+| 0.692387574220678   | 0.11240498671185131   | 0.0   |
+| 0.6642838965724711  | 0.18842665050725657   | 0.0   |
+| 0.690506568746174   | 0.2000820351598212   | 0.0   |
+| 0.6629531615910564  | 0.17187152578295337   | 0.0   |
+| 0.7406926138147159  | 0.15772506039841624   | 0.0   |
+| 0.795548832526095   | 0.12641128263148094   | 0.0   |
+| 0.8884103250603481   | 0.09727527291491649   | 0.0   |
+| 0.873301915530903   | 0.05216006748560099   | 0.0   |
+| 0.8158854356576679   | 0.06494718990986122   | 0.0   |
+| 0.7899100455687188   | 0.0864340539586151   | 0.0   |
+| 0.7826216180477299   | 0.1270870510016491   | 0.0   |
+| 0.6243754567234394   | 0.10244470618228722   | 0.0   |
+| 0.5809893135464423   | 0.17781713506801744   | 0.0   |
 
 
 
