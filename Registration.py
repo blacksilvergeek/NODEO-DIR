@@ -22,6 +22,7 @@ def main(config):
     print('---Results Saved---')
 
 
+
 def registration(config, device, moving, fixed):
     '''
     Registration moving to fixed.
@@ -112,8 +113,30 @@ def evaluation(config, device, df, df_with_grid):
     warped_seg = ST_seg(moving_seg, df, return_phi=False)
     dice_move2fix = dice(warped_seg.unsqueeze(0).unsqueeze(0).detach().cpu().numpy(), fixed_seg, label)
     print('Avg. dice on %d structures: ' % len(label), np.mean(dice_move2fix[0]))
-    print('Std of dice on %d structures: ' % len(label), np.std(dice_move2fix[0]))
 
+def evaluation_anova(config, device, df, df_with_grid):
+    ### Calculate Neg Jac Ratio
+    neg_Jet = -1.0 * JacboianDet(df_with_grid)
+    neg_Jet = F.relu(neg_Jet)
+    mean_neg_J = torch.sum(neg_Jet).detach().cpu().numpy()
+    num_neg = len(torch.where(neg_Jet > 0)[0])
+    total = neg_Jet.size(-1) * neg_Jet.size(-2) * neg_Jet.size(-3)
+    ratio_neg_J = num_neg / total
+    print('Total of neg Jet: ', mean_neg_J)
+    print('Ratio of neg Jet: ', ratio_neg_J)
+    ### Calculate Dice
+    label = [2, 3, 4, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 24, 28, 41, 42, 43, 46, 47, 49, 50, 51, 52, 53, 54, 60]
+    fixed_seg = load_nii(config.fixed_seg)
+    moving_seg = load_nii(config.moving_seg)
+    ST_seg = SpatialTransformer(fixed_seg.shape, mode='nearest').to(device)
+    moving_seg = torch.from_numpy(moving_seg).to(device).float()
+    # make batch dimension
+    moving_seg = moving_seg[None, None, ...]
+    warped_seg = ST_seg(moving_seg, df, return_phi=False)
+    dice_move2fix = dice(warped_seg.unsqueeze(0).unsqueeze(0).detach().cpu().numpy(), fixed_seg, label)
+    mean_dice = np.mean(dice_move2fix)
+    std_dice = np.std(dice_move2fix)
+    return mean_dice, std_dice, ratio_neg_J
 
 def save_result(config, df, warped_moving):
     save_nii(df.permute(2,3,4,0,1).detach().cpu().numpy(), '%s/df.nii.gz' % (config.savepath))
