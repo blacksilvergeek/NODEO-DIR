@@ -18,6 +18,8 @@ Run Registration_iter.py to reproduce data for table.
 
 In main.ipynb, you can find the reproduce of figure.
 
+For new data and hyperparameter check, you can find code in another branch.
+
 # Overview
 
 Hereby an overview of who wrote which parts:
